@@ -1,60 +1,101 @@
-@mixin respond-to($breakpoint) {
-  $raw-query: map-get($breakpoints, $breakpoint);
-
-  @if $raw-query {
-    $query: if(
-      type-of($raw-query) == 'string',
-      unquote($raw-query),
-      inspect($raw-query)
-    );
-
-    @media #{$query} {
-      @content;
-    }
-  } @else {
-    @error 'No value found for `#{$breakpoint}`. '
-         + 'Please make sure it is defined in `$breakpoints` map.';
+@mixin push--auto {
+  margin: {
+    left: auto;
+    right: auto;
   }
 }
 
-@mixin pseudo(
-  $loc: before,
-  $content: '',
-  $pos: absolute,
-  $top: 0,
-  $bottom: 0,
-  $left: 0,
-  $right: 0
+@mixin css-triangle(
+  $color,
+  $direction,
+  $size: 6px,
+  $position: absolute,
+  $round: false
 ) {
-  position: relative;
+  @include pseudo($pos: $position);
+  width: 0;
+  height: 0;
+  @if $round {
+    border-radius: 3px;
+  }
+  @if $direction == down {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    margin-top: 0 - round($size / 2.5);
+  } @else if $direction == up {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    margin-bottom: 0 - round($size / 2.5);
+  } @else if $direction == right {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    margin-right: -$size;
+  } @else if $direction == left {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    margin-left: -$size;
+  }
+}
 
-  &::#{$loc} {
-    content: $content;
-    position: $pos;
-    top: $top;
-    bottom: $bottom;
-    left: $left;
-    right: $right;
+@mixin responsive-ratio($x, $y, $pseudo: false) {
+  $padding: unquote(($y / $x) * 100 + '%');
+  @if $pseudo {
+    &:before {
+      @include pseudo($pos: relative);
+      width: 100%;
+      padding-top: $padding;
+    }
+  } @else {
+    padding-top: $padding;
+  }
+}
+
+@mixin font-source-sans(
+  $size: false,
+  $colour: false,
+  $weight: false,
+  $lh: false
+) {
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  @if $size {
+    font-size: $size;
+  }
+  @if $colour {
+    color: $colour;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+  @if $lh {
+    line-height: $lh;
+  }
+}
+
+@mixin input-placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
     @content;
   }
 }
 
-@mixin hover-lift() {
-  transition: transform 350ms ease-in-out;
-  box-shadow: 0 0.25em 0.5em 0 rgba(black, 0.2);
-
-  @include pseudo($loc: before) {
-    box-shadow: 0 0 1.25em 0 rgba(black, 0.4);
-    transition: transform 350ms ease-in-out;
-    opacity: 0;
-  }
-
+@mixin hocus {
   &:hover,
   &:focus {
-    transform: scale(1.05);
-
-    &::before {
-      opacity: 1;
-    }
+    @content;
   }
 }

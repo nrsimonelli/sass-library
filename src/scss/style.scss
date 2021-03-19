@@ -1,7 +1,8 @@
 @use './abstracts' as a;
 
 body {
-  background-color: aquamarine;
+  background-color: #121212;
+  color: white;
   font-size: 1.25rem;
   margin: 0;
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -9,4 +10,44 @@ body {
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.nav {
+  width: 100%;
+  height: 60vh;
+
+  @include a.media('<=sm') {
+    background-color: a.$support;
+    &:before {
+      content: 'Phone';
+    }
+  }
+
+  @include a.media('>sm', '<=md') {
+    background-color: a.$accent;
+    &:before {
+      content: 'landscape phone';
+    }
+  }
+
+  @include a.media('>md', '<lg') {
+    background-color: a.$secondary;
+    &:before {
+      content: 'Laptop';
+    }
+  }
+
+  @include a.media('>=lg', '<xl') {
+    background-color: a.$primary;
+    &:before {
+      content: 'Desktop';
+    }
+  }
+
+  @include a.media('>=xl') {
+    background-color: red;
+    &:before {
+      content: 'Wide Desktop';
+    }
+  }
 }
