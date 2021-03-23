@@ -1,61 +1,111 @@
-/**
-*
-* Testing
-*
-**/
+:root {
+  --font-primary: sans-serif;
+  --font-secondary: serif;
+  /* set base values */
+  --text-base-size: 1em;
+  --text-scale-ratio: 1.2;
+  /* type scale */
+  --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
+  --text-sm: calc(1em / var(--text-scale-ratio));
+  --text-md: calc(1em * var(--text-scale-ratio));
+  --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  /* line-height */
+  --heading-line-height: 1.2;
+  --body-line-height: 1.4;
+}
+
 body {
-  background-color: #121212;
-  color: white;
-  font-size: 1.25rem;
+  background-color: #1f1f1f;
+  color: rgba(0, 0, 0, 0.85);
   margin: 0;
+  padding: 0;
   font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 150vh;
 }
 
 .nav {
+  height: 65px;
   width: 100%;
-  height: 60vh;
+  position: fixed;
+  top: 0;
+  overflow: hidden;
 }
 @media (max-width: 360px) {
   .nav {
     background-color: #ffc75f;
-  }
-  .nav:before {
-    content: "Phone";
   }
 }
 @media (min-width: 361px) and (max-width: 768px) {
   .nav {
     background-color: #f9f871;
   }
-  .nav:before {
-    content: "landscape phone";
-  }
 }
 @media (min-width: 769px) and (max-width: 1365px) {
   .nav {
     background-color: #ff6f91;
-  }
-  .nav:before {
-    content: "Laptop";
   }
 }
 @media (min-width: 1366px) and (max-width: 1919px) {
   .nav {
     background-color: #845ec2;
   }
-  .nav:before {
-    content: "Desktop";
-  }
 }
 @media (min-width: 1920px) {
   .nav {
     background-color: red;
   }
-  .nav:before {
-    content: "Wide Desktop";
-  }
+}
+
+.nav-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left {
+  margin-left: 12px;
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+  border: 1px solid blue;
+  margin-right: 12px;
+}
+
+.content {
+  height: 50px;
+  width: 50px;
+  background-color: #845ec2;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.side {
+  background-color: #ff6f91;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-top: 240px;
+}
+
+.footer {
+  background-color: #f9f871;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 /*# sourceMappingURL=style.css.map */
